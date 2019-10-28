@@ -1,8 +1,13 @@
 const express = require('express');
 const app = express();
+
+
 app.use(express.json()); //Used to parse JSON bodies
 app.use(express.urlencoded( {extended: true} )); //Parse URL-encoded bodies
 
+const cors = require('cors'); //Enable CORS
+app.use(cors())
+  
 // Initialise postgres client
 const pg = require('pg');
 const config = {
@@ -17,25 +22,10 @@ pool.on('error', function (err) {
   console.log('idle client error', err.message, err.stack);
 });
 
-app.get('*', (request, response) => {
-  const queryString = 'SELECT * from users';
-  pool.query(queryString, (err, result) => {
-    if (err) {
-      console.error('query error:', err.stack);
-      response.send( 'query error' );
-    } else {
-      console.log('query result:', result);
-
-      // redirect to home page
-      response.send( result.rows );
-    }
-  });
-});
-
-app.post('/wildcard', async (request, response) => {
+app.post('/wildcard', cors(), async (request, response) => {
   let data = request.body;
   console.log(data);
-
+  
   if (data.mode == 'sql') {
     try {
       let result = await SQLquery(data.queryString)
@@ -49,6 +39,11 @@ app.post('/wildcard', async (request, response) => {
       response.send("SQL Error");
     }
   }
+});
+
+app.get('*', (request, response) => {
+  response.status(404);
+  response.send("404 not found");
 });
 
 function SQLquery(queryString){
