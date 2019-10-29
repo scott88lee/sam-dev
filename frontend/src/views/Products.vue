@@ -7,20 +7,38 @@
       <div class="ui grid">
         <div class="four wide column">
           <div class="ui vertical fluid menu">
-            <a class="item active">Record purchase</a>
-            <a class="item">Add products</a>
-            <a class="item">Add suppliers</a>
-            <a class="item">Manage catergories</a>
-          </div>
-          <div class="ui vertical fluid menu">
-            <a class="item active">Record murders</a>
-            <a class="item">Add products</a>
-            <a class="item">Add suppliers</a>
-            <a class="item">Manage catergories</a>
+            <a
+              class="item"
+              @click="toggleMenu('purchase')"
+              v-bind:class="{ active: menu.purchase }"
+              >Record purchase</a
+            >
+            <a
+              class="item"
+              @click="toggleMenu('addproduct')"
+              v-bind:class="{ active: menu.addproduct }"
+              >Add products</a
+            >
+            <a
+              class="item"
+              @click="toggleMenu('addsupplier')"
+              v-bind:class="{ active: menu.addsupplier }"
+              >Add suppliers</a
+            >
+            <a
+              class="item"
+              @click="toggleMenu('manageproduct')"
+              v-bind:class="{ active: menu.manageproduct }"
+              >Manage products</a
+            >
           </div>
         </div>
         <div class="twelve wide stretched column">
-          <div class="ui segment">This segment auto</div>
+          <div class="ui segment">
+            <ProductPurchase v-if="menu.purchase" />
+            This segment auto
+            <button @click="shout">Shout</button>
+          </div>
         </div>
       </div>
     </div>
@@ -28,34 +46,32 @@
 </template>
 
 <script>
-import axios from "axios";
+//components
+import ProductPurchase from "@/components/products/purchase.vue";
+
 export default {
-  name: "tools",
+  name: "products",
+  components: {
+    ProductPurchase
+  },
   data() {
     return {
-      query: "Enter here",
-      results: "Results"
+      menu: {
+        purchase: true,
+        addproduct: false,
+        addsupplier: false
+      }
     };
   },
   methods: {
-    shout(word) {
-      console.log(word);
+    shout() {
+      console.log(this.menu);
     },
-    async post() {
-      let payload = {
-        mode: "sql",
-        queryString: this.query
-      };
-      try {
-        const response = await axios.post(
-          "http://localhost:3000/wildcard",
-          payload
-        );
-        console.log(response);
-        this.results = JSON.stringify(response.data);
-      } catch (error) {
-        console.error(error);
+    toggleMenu(selection) {
+      for (let item in this.menu) {
+        this.menu[item] = false;
       }
+      this.menu[selection] = true;
     }
   }
 };
