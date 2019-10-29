@@ -1,10 +1,12 @@
+//INITIALISE EXPRESS
 const express = require('express');
 const app = express();
 
-
+//MIDDLE-WARE - BODYPARSER
 app.use(express.json()); //Used to parse JSON bodies
 app.use(express.urlencoded( {extended: true} )); //Parse URL-encoded bodies
 
+//ENABLE CORS FOR DEVELOPMENT
 const cors = require('cors'); //Enable CORS
 app.use(cors())
   
@@ -15,11 +17,29 @@ const config = {
   database: 'sam-dev',
   port: 5432
 };
+const awsrds = {
+  host: 'samima-dev.cqwedve0zmoz.ap-southeast-1.rds.amazonaws.com',
+  database: 'samdev',
+  user: 'postgres',
+  password: 'testing123', //not actual passwords
+  port: 5432
+};
 
-const pool = new pg.Pool(config);
+//DATABASE SELECTION
+const pool = new pg.Pool(awsrds);
 
 pool.on('error', function (err) {
   console.log('idle client error', err.message, err.stack);
+});
+
+
+//START OF ROUTES
+app.post('/products/new', (req, res) => {
+  let data = req.body;
+  console.log(data);
+  res.send(
+    JSON.stringify(data)
+    );
 });
 
 app.post('/wildcard', cors(), async (request, response) => {
@@ -39,6 +59,15 @@ app.post('/wildcard', cors(), async (request, response) => {
       response.send("SQL Error");
     }
   }
+});
+
+app.get('/setup', (request, response) => {
+  let queryString = "CREATE TABLE IF NOT EXISTS products (\r\n    product_id SERIAL PRIMARY KEY,\r\n    SKU VARCHAR(30) NOT NULL,\r\n    brand TEXT NOT NULL,\r\n    model TEXT NOT NULL,\r\n    supplier INT NOT NULL,\r\n    description TEXT,\r\n    color TEXT,\r\n    variation TEXT\r\n);"
+
+  SQLquery(queryString);
+  response.send('Setting up database...');
+  //response.status(404);
+  //response.send("404 not found");
 });
 
 app.get('*', (request, response) => {
