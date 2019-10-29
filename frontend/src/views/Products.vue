@@ -1,9 +1,29 @@
 <template>
-  <div class="tools">
-    <h1>This is an TOOLS page</h1>
-    <textarea v-model="query" name="SQL" id="" cols="30" rows="10"></textarea>
-    <button v-on:click="post()">Query</button>
-    <textarea v-model="results" name="SQL" id="" cols="30" rows="10"></textarea>
+  <div class="Products">
+    <div class="ui top attached tabular menu">
+      <div class="active item">Products</div>
+    </div>
+    <div class="ui attached segment">
+      <div class="ui grid">
+        <div class="four wide column">
+          <div class="ui vertical fluid menu">
+            <a class="item active">Record purchase</a>
+            <a class="item">Add products</a>
+            <a class="item">Add suppliers</a>
+            <a class="item">Manage catergories</a>
+          </div>
+          <div class="ui vertical fluid menu">
+            <a class="item active">Record murders</a>
+            <a class="item">Add products</a>
+            <a class="item">Add suppliers</a>
+            <a class="item">Manage catergories</a>
+          </div>
+        </div>
+        <div class="twelve wide stretched column">
+          <div class="ui segment">This segment auto</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
