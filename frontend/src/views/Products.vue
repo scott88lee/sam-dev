@@ -36,6 +36,9 @@
         <div class="twelve wide stretched column">
           <div class="ui segment">
             <ProductPurchase v-if="menu.purchase" />
+            <AddProduct v-if="menu.addproduct" />
+            <ManageProduct v-if="menu.manageproduct" />
+            <AddSupplier v-if="menu.addsupplier" />
             This segment auto
             <button @click="shout">Shout</button>
           </div>
@@ -48,11 +51,17 @@
 <script>
 //components
 import ProductPurchase from "@/components/products/purchase.vue";
+import AddSupplier from "@/components/products/addsupplier.vue";
+import ManageProduct from "@/components/products/manageproduct.vue";
+import AddProduct from "@/components/products/addproduct.vue";
 
 export default {
   name: "products",
   components: {
-    ProductPurchase
+    ProductPurchase,
+    AddSupplier,
+    ManageProduct,
+    AddProduct
   },
   data() {
     return {
