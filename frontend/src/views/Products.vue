@@ -15,6 +15,14 @@
             >
             <a
               class="item"
+              @click="toggleMenu('listpurchases')"
+              v-bind:class="{ active: menu.listpurchases }"
+              >List purchases</a
+            >
+          </div>
+          <div class="ui vertical fluid menu">
+            <a
+              class="item"
               @click="toggleMenu('addproduct')"
               v-bind:class="{ active: menu.addproduct }"
               >Add products</a
