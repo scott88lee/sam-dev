@@ -18,9 +18,9 @@ const config = {
   port: 5432
 };
 const awsrds = {
-  host: 'samima-dev.cqwedve0zmoz.ap-southeast-1.rds.amazonaws.com',
-  database: 'samdev',
-  user: 'postgres',
+  host: 'sam-dev.cf6awl3jeoo9.ap-southeast-1.rds.amazonaws.com',
+  database: 'samima',
+  user: 'master',
   password: 'testing123', //not actual passwords
   port: 5432
 };
