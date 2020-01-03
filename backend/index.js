@@ -12,7 +12,7 @@ app.use(cors())
   
 // Initialise postgres client
 const pg = require('pg');
-const config = {
+const config1 = {
   host: '127.0.0.1',
   database: 'sam-dev',
   port: 5432
