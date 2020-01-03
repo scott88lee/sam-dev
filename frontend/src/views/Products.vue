@@ -23,8 +23,8 @@
           <div class="ui vertical fluid menu">
             <a
               class="item"
-              @click="toggleMenu('Product List')"
-              v-bind:class="{ active: menu.listProduct }"
+              @click="toggleMenu('listproducts')"
+              v-bind:class="{ active: menu.listproducts }"
               >List products</a
             >
             <a
