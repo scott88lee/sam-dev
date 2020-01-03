@@ -23,6 +23,12 @@
           <div class="ui vertical fluid menu">
             <a
               class="item"
+              @click="toggleMenu('Product List')"
+              v-bind:class="{ active: menu.listProduct }"
+              >List products</a
+            >
+            <a
+              class="item"
               @click="toggleMenu('addproduct')"
               v-bind:class="{ active: menu.addproduct }"
               >Add products</a
@@ -47,6 +53,7 @@
             <AddProduct v-if="menu.addproduct" />
             <ManageProduct v-if="menu.manageproduct" />
             <AddSupplier v-if="menu.addsupplier" />
+            <ListProducts v-if="menu.listproducts" />
             This segment auto
             <button @click="shout">Shout</button>
           </div>
@@ -62,6 +69,7 @@ import ProductPurchase from "@/components/products/purchase.vue";
 import AddSupplier from "@/components/products/addsupplier.vue";
 import ManageProduct from "@/components/products/manageproduct.vue";
 import AddProduct from "@/components/products/addproduct.vue";
+import ListProducts from "@/components/products/listproducts.vue";
 
 export default {
   name: "products",
@@ -69,14 +77,16 @@ export default {
     ProductPurchase,
     AddSupplier,
     ManageProduct,
-    AddProduct
+    AddProduct,
+    ListProducts
   },
   data() {
     return {
       menu: {
         purchase: true,
         addproduct: false,
-        addsupplier: false
+        addsupplier: false,
+        listproducts: false
       }
     };
   },

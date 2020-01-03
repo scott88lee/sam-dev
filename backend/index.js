@@ -17,6 +17,7 @@ const config = {
   database: 'sam-dev',
   port: 5432
 };
+
 const awsrds = {
   host: 'sam-dev.cf6awl3jeoo9.ap-southeast-1.rds.amazonaws.com',
   database: 'samima',
@@ -34,6 +35,19 @@ pool.on('error', function (err) {
 
 
 //START OF ROUTES
+app.get('/products', async (req, res) => {
+  let queryString = "SELECT * FROM products;"
+  console.log("hey");
+  try {
+    let result = await SQLquery(queryString);
+    res.send(result);
+  } 
+  catch (errMSG) {
+    console.log("Error")
+    res.send("Error: " + errMSG);
+  }
+})
+
 app.post('/products/new', (req, res) => {
   let data = req.body;
   console.log(data);
@@ -75,6 +89,8 @@ app.get('*', (request, response) => {
   response.send("404 not found");
 });
 
+
+//ASYNC FUNCTIONS
 function SQLquery(queryString){
   console.log('Executing: ' + queryString);
   
