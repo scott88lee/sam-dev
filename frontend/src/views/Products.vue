@@ -92,7 +92,7 @@ export default {
   },
   methods: {
     shout() {
-      console.log(this.menu);
+      //console.log(this.menu);
     },
     toggleMenu(selection) {
       for (let item in this.menu) {

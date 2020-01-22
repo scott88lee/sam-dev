@@ -1,7 +1,5 @@
 <template>
-  <div>
-    Product list: <button @click="load">Load</button>
-  </div>
+  <div>Product list: <button @click="load">Load</button></div>
 </template>
 
 <script>
@@ -10,24 +8,24 @@ export default {
     return {
       something: true,
       loaded: false,
-      list : {}
+      list: {}
     };
   },
   beforeCreate() {
-    console.log('Before create: ' + this.something)
+    console.log("Before create: " + this.something);
   },
   mounted() {
     if (this.something == true) {
-      console.log('Mounted: ' + this.something)
+      console.log("Mounted: " + this.something);
     }
   },
   destroyed() {
     console.log("Goodbye");
   },
-  methods:{
+  methods: {
     load: function() {
-      console.log("load clicked")
+      console.log("load clicked");
     }
   }
-}
+};
 </script>
