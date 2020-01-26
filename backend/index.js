@@ -41,7 +41,7 @@ app.get('/products', async (req, res) => {
   try {
     let result = await SQLquery(queryString);
     res.send(result);
-  } 
+  }
   catch (errMSG) {
     console.log("Error")
     res.send("Error: " + errMSG);
